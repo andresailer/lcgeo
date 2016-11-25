@@ -248,7 +248,7 @@ class DD4hepSimulation(object):
   #      if len(detectorList) and not(name in detectorList):
   #        continue
         print 'getDetectorLists - found active detctor ' ,  name , ' type: ' , detType
-        if detType == "tracker":
+        if detType == "tracker" or "tracker" in detType:
           trackers.append( det.name() )
         if detType == "calorimeter":
           calos.append( det.name() )
