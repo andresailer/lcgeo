@@ -68,7 +68,8 @@ file(GLOB sources
   ./detector/calorimeter/*.cpp 
   ./detector/fcal/*.cpp 
   ./detector/other/*.cpp 
-  ./detector/CaloTB/*.cpp 
+  ./detector/CaloTB/*.cpp
+  ./detector/TkLayout/*.cpp
   ./FCalTB/setup/*.cpp
   )
 
