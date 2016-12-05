@@ -46,7 +46,7 @@
         <comment>The tracker numbering scheme applied in the XML is designed as follows: all sub-trackers, barrels/discs, layers/rings etc. are numbered by increasing ID from inside, i.e. IP, out. Individual subtrackers' ID start with 10, subtracker components' ID with 1. In addition, no global numbering scheme accross the overall tracker is applied. Instead, the hierarchical scheme is used, e.g. individual rings numbering starts with ID=1 for each disc, modules numbering with ID=1 for each ring etc. As for the sub-components arranged in R-Phi, ID increases along the increasing phi angle (rotation along Z-axis in right-handed coordinate scheme), starting with ID=1 for a component positioned at phi0. As for the sub-components arranged in Z (e.g. modules in a rod), ID increases from -Z to +Z.</comment>
         <detector id="10" name="InnerBRL_Inner0" type="TkLayoutBrlTracker" readout="TrackerBarrelReadout1">
             <dimensions rmin="19.975*mm" rmax="23.994*mm" zmin="-380.000*mm" zmax="380.000*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <layers repeat="1">
                 <layer id="1" radius="21.550*mm" rmin="19.975*mm" rmax="23.994*mm" bigDelta="0.500*mm" phi0="1.570796*rad">
                     <rods repeat="12" smallDelta="0.000*mm" rPhiOverlap="0.500*mm" nRPhiSegments="2" zOverlap="0.000*mm" nModules="4">
@@ -94,7 +94,7 @@
         </detector>
         <detector id="11" name="InnerBR_Inner1" type="TkLayoutBrlTracker" readout="TrackerBarrelReadout2">
             <dimensions rmin="48.975*mm" rmax="451.011*mm" zmin="-750.000*mm" zmax="750.000*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <layers repeat="6">
                 <layer id="1" radius="57.550*mm" rmin="48.975*mm" rmax="67.352*mm" bigDelta="5.000*mm" phi0="1.570796*rad">
                     <rods repeat="16" smallDelta="2.500*mm" rPhiOverlap="0.500*mm" nRPhiSegments="2" zOverlap="0.500*mm" nModules="17">
@@ -508,7 +508,7 @@
         </detector>
         <detector id="12" name="InnerECAP" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout1">
             <dimensions rmin="21.000*mm" rmax="451.094*mm" zmin="991.425*mm" zmax="2258.575*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <discs repeat="12">
                 <discZPls id="1" z="1000.000*mm" zmin="991.425*mm" zmax="1008.575*mm" bigDelta="5.000*mm">
                     <rings repeat="5" smallDelta="2.500*mm" rPhiOverlap="0.500*mm" nRPhiSegments="4" rOverlap="0.500*mm">
@@ -618,7 +618,7 @@
         </detector>
         <detector id="13" name="OuterBRL" type="TkLayoutBrlTracker" readout="TrackerBarrelReadout3">
             <dimensions rmin="597.950*mm" rmax="1552.045*mm" zmin="-2250.000*mm" zmax="2250.000*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <layers repeat="6">
                 <layer id="1" radius="607.600*mm" rmin="597.950*mm" rmax="619.370*mm" bigDelta="5.000*mm" phi0="1.570796*rad">
                     <rods repeat="38" smallDelta="2.500*mm" rPhiOverlap="0.500*mm" nRPhiSegments="2" zOverlap="0.500*mm" nModules="47">
@@ -1392,7 +1392,7 @@
         </detector>
         <detector id="14" name="OuterECAP" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout2">
             <dimensions rmin="25.000*mm" rmax="1552.356*mm" zmin="2615.350*mm" zmax="5009.650*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <discs repeat="12">
                 <discZPls id="1" z="2625.000*mm" zmin="2615.350*mm" zmax="2634.650*mm" bigDelta="5.000*mm">
                     <rings repeat="15" smallDelta="2.500*mm" rPhiOverlap="0.500*mm" nRPhiSegments="4" rOverlap="0.500*mm">
@@ -1672,7 +1672,7 @@
         </detector>
         <detector id="15" name="FwdECAP" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout3">
             <dimensions rmin="60.000*mm" rmax="1555.421*mm" zmin="8990.350*mm" zmax="16009.650*mm"/>
-            <sensitive type="Geant4tracker"/>
+            <sensitive type="tracker"/>
             <discs repeat="12">
                 <discZPls id="1" z="9000.000*mm" zmin="8990.350*mm" zmax="9009.650*mm" bigDelta="5.000*mm">
                     <rings repeat="16" smallDelta="2.500*mm" rPhiOverlap="0.500*mm" nRPhiSegments="4" rOverlap="0.500*mm">
