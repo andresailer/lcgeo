@@ -1967,5 +1967,54 @@
                 </discZPls>
             </discs>
         </detector>
-    </detectors>
+      </detectors>
+
+      <plugins>
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="InnerBRL_Inner0"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=-1."/>
+          <argument value="n_z=1."/>
+	</plugin>	
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="InnerBR_Inner1"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=1."/>
+          <argument value="n_z=1."/>
+	</plugin>
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="InnerECAP"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=1."/>
+          <argument value="n_z=1."/>
+	</plugin>
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="OuterBRL"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=1."/>
+          <argument value="n_z=1."/>
+	</plugin>
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="OuterECAP"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=1."/>
+          <argument value="n_z=1."/>
+	</plugin>
+	<plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+          <argument value="FwdECAP"/>
+          <argument value="dimension=2"/>
+          <argument value="u_x=-1."/>
+          <argument value="v_y=1."/>
+          <argument value="n_z=1."/>
+	</plugin>
+      </plugins>
+    <plugins>
+	<plugin name="InstallSurfaceManager"/>
+      </plugins>
+      
 </lccdd>
