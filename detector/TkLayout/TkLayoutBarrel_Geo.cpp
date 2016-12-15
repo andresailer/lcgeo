@@ -38,6 +38,8 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
   // loop over 'layer' nodes in xml
   DD4hep::XML::Component xLayers = xmlElement.child("layers");
   for (DD4hep::XML::Collection_t xLayerColl(xLayers, _U(layer)); nullptr != xLayerColl; ++xLayerColl) {
+    PlacedVolume sensitivePlacement;
+
     DD4hep::XML::Component xLayer = static_cast<DD4hep::XML::Component>(xLayerColl);
     DD4hep::XML::Component xRods = xLayer.child("rods");
     DD4hep::XML::Component xRodEven = xRods.child("rodOdd");
@@ -71,11 +73,14 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
 	  , 0);
       integratedModuleComponentThickness += xModuleComponentOdd.thickness();
 
-      if( xModuleComponentOdd.isSensitive() ) { moduleComponentVolume.setSensitiveDetector(sensDet); }
 
       PlacedVolume placedModuleComponentVolume = moduleVolume.placeVolume(moduleComponentVolume, offset);
       placedModuleComponentVolume.addPhysVolID("component", moduleComponentCounter);
       ++moduleComponentCounter;
+      if( xModuleComponentOdd.isSensitive() ) {
+	moduleComponentVolume.setSensitiveDetector(sensDet);
+	sensitivePlacement = placedModuleComponentVolume;
+      }
     }
     // definition of layer volumes
     double lX, lY, lZ;
@@ -104,6 +109,13 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
         DD4hep::Geometry::RotationZ lRotation(phi);
         PlacedVolume placedModuleVolume = layerVolume.placeVolume(moduleVolume, lRotation * lTrafo);
         placedModuleVolume.addPhysVolID("module", moduleCounter);
+	std::string moduleName = DD4hep::_toString(int(layerCounter),"layer%d")
+	  + DD4hep::_toString(int(moduleCounter),"_module%d");
+	DetElement detModule(topDetElement, moduleName, xmlDet.id());
+	detModule.setPlacement(placedModuleVolume);
+	DetElement detSensor( detModule, "sensor", xmlDet.id());
+	detSensor.setPlacement( sensitivePlacement );
+
         ++moduleCounter;
       }
     }
