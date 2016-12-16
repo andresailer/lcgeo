@@ -80,7 +80,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
         PlacedVolume placedComponentVolume = moduleVolume.placeVolume(
             componentVolume,
             DD4hep::Geometry::Position(
-                0, integratedCompThickness - 0.5 * xModuleProperties.attr<double>("modThickness"), 0));
+                0, integratedCompThickness - 0.5 * xModuleProperties.attr<double>("modThickness") + 0.5 * xComp.thickness(), 0));
         placedComponentVolume.addPhysVolID("component", componentCounter);
 
         ///componentVolume.setSensitiveDetector(sensDet);
@@ -140,7 +140,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   Volume motherVol = lcdd.pickMotherVolume(worldDetElement);
   DD4hep::Geometry::Translation3D envelopeTranslation(0, 0, dimensions.zmin() + envelopeThickness);
   double envelopeNegRotAngle = 0;
-  if (dimensions.reflect()) {
+  if (dimensions.attr<bool>("reflect")) {
     envelopeNegRotAngle = dd4hep::pi;
   }
   DD4hep::Geometry::RotationX envelopeNegRotation(envelopeNegRotAngle);
