@@ -20,6 +20,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
   DD4hep::XML::Dimension sdTyp = xmlElement.child("sensitive");
   // sensitive detector used for all sensitive parts of this detector
   sensDet.setType(sdTyp.typeStr());
+
   // definition of top volume
   // has min/max dimensions of tracker for visualization etc.
   std::string detectorName = xmlDet.nameStr();
@@ -66,11 +67,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
                                                          0.5 * xModulePropertiesOdd.attr<double>("modLength")),
                                    lcdd.material(xModuleComponentOdd.materialStr()));
       DD4hep::Geometry::Position offset(
-          0,
-	  - 0.5 * xModulePropertiesOdd.attr<double>("modThickness")
-	  + integratedModuleComponentThickness
-	  + 0.5 * xModuleComponentOdd.thickness()
-	  , 0);
+          0, integratedModuleComponentThickness - 0.5 * xModulePropertiesOdd.attr<double>("modThickness") + 0.5 * xModuleComponentOdd.thickness(), 0);
       integratedModuleComponentThickness += xModuleComponentOdd.thickness();
 
 
@@ -89,6 +86,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
     layerVolume.setVisAttributes(lcdd.invisible());
     PlacedVolume placedLayerVolume = topVolume.placeVolume(layerVolume);
     placedLayerVolume.addPhysVolID("layer", layerCounter);
+    DetElement lay_det(topDetElement, "layer" + std::to_string(layerCounter), layerCounter);
     nPhi = xRods.repeat();
     int moduleCounter = 0;
     DD4hep::XML::Handle_t currentComp;
@@ -109,16 +107,16 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
         DD4hep::Geometry::RotationZ lRotation(phi);
         PlacedVolume placedModuleVolume = layerVolume.placeVolume(moduleVolume, lRotation * lTrafo);
         placedModuleVolume.addPhysVolID("module", moduleCounter);
-	std::string moduleName = DD4hep::_toString(int(layerCounter),"layer%d")
-	  + DD4hep::_toString(int(moduleCounter),"_module%d");
-	DetElement detModule(topDetElement, moduleName, xmlDet.id());
-	detModule.setPlacement(placedModuleVolume);
-	DetElement detSensor( detModule, "sensor", xmlDet.id());
+        DetElement mod_det("module" + std::to_string(moduleCounter), moduleCounter);
+	mod_det.setPlacement(placedModuleVolume);
+	lay_det.add(mod_det);
+	DetElement detSensor( mod_det, "sensor", xmlDet.id());
 	detSensor.setPlacement( sensitivePlacement );
 
         ++moduleCounter;
       }
     }
+    lay_det.setPlacement(placedLayerVolume);
     ++layerCounter;
   }
   Volume motherVol = lcdd.pickMotherVolume(topDetElement);
