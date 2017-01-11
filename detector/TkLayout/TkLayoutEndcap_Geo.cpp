@@ -51,6 +51,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
     DetElement disc_det(worldDetElement, "disc" + std::to_string(discCounter), discCounter);
     // generate rings and place in  discs
     for (DD4hep::XML::Collection_t xRingColl(xFirstDiscRings, _U(ring)); nullptr != xRingColl; ++xRingColl) {
+      PlacedVolume sensitivePlacement;
       Component xRing = static_cast<Component>(xRingColl);
       Component xRingModules = xRing.child("modules");
       Component xModuleOdd = xRingModules.child("moduleOdd");
@@ -82,7 +83,13 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
             DD4hep::Geometry::Position(
                 0, integratedCompThickness - 0.5 * xModuleProperties.attr<double>("modThickness") + 0.5 * xComp.thickness(), 0));
         placedComponentVolume.addPhysVolID("component", componentCounter);
+	
+	if( xComp.isSensitive() ) {
+	  componentVolume.setSensitiveDetector(sensDet);
+	  sensitivePlacement = placedComponentVolume;
+	}
 
+	
         ///componentVolume.setSensitiveDetector(sensDet);
         integratedCompThickness += xComp.thickness();
         ++componentCounter;
@@ -123,11 +130,16 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
         DD4hep::Geometry::Transform3D myTrafo(lRotation4 * lRotation3 * lRotation2 * lRotation1, lTranslation);
         PlacedVolume placedModuleVolume = discVolume.placeVolume(moduleVolume, lRotation_PhiPos * myTrafo);
         placedModuleVolume.addPhysVolID("module", moduleCounter);
-        moduleVolume.setSensitiveDetector(sensDet);
+        //moduleVolume.setSensitiveDetector(sensDet);
         DetElement mod_det("module" + std::to_string(moduleCounter), moduleCounter);
+
         mod_det.setPlacement(placedModuleVolume);
         disc_det.add(mod_det);
-        ++moduleCounter;
+
+	DetElement detSensor( mod_det, "sensor", xmlDet.id());
+	detSensor.setPlacement( sensitivePlacement );
+
+	++moduleCounter;
       }
     }
   PlacedVolume placedDiscVolume = envelopeVolume.placeVolume(discVolume, DD4hep::Geometry::Position(0, 0, currentZ));
