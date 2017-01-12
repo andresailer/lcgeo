@@ -41,11 +41,11 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   Volume discVolume("disc", discShape, lcdd.air());
   discVolume.setVisAttributes(lcdd.invisible());
 
-  int moduleCounter = 0;
 
   unsigned int discCounter = 0;
   double currentZ;
   for (DD4hep::XML::Collection_t xDiscColl(xDiscs, "discZPls"); nullptr != xDiscColl; ++xDiscColl) {
+    int moduleCounter = 0;
     Component xDisc = static_cast<Component>(xDiscColl);
     currentZ = xDisc.z() - dimensions.zmin() - envelopeThickness;
     DetElement disc_det(worldDetElement, "disc" + std::to_string(discCounter), discCounter);
@@ -158,6 +158,9 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   DD4hep::Geometry::RotationX envelopeNegRotation(envelopeNegRotAngle);
   PlacedVolume placedEnvelopeVolume = motherVol.placeVolume(envelopeVolume, envelopeNegRotation * envelopeTranslation);
   placedEnvelopeVolume.addPhysVolID("system", xmlDet.id());
+  if (dimensions.attr<bool>("reflect")) {
+    placedEnvelopeVolume.addPhysVolID("posneg", 1);
+  }
   worldDetElement.setPlacement(placedEnvelopeVolume);
   return worldDetElement;
 }
