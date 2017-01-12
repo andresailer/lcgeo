@@ -38,18 +38,24 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   // create disc volume
   double discThickness = 0.5 * (xFirstDisc.zmax() - xFirstDisc.zmin());
   DD4hep::Geometry::Tube discShape(dimensions.rmin(), dimensions.rmax(), discThickness);
-  Volume discVolume("disc", discShape, lcdd.air());
-  discVolume.setVisAttributes(lcdd.invisible());
-
 
   unsigned int discCounter = 0;
   double currentZ;
   for (DD4hep::XML::Collection_t xDiscColl(xDiscs, "discZPls"); nullptr != xDiscColl; ++xDiscColl) {
-    int moduleCounter = 0;
     Component xDisc = static_cast<Component>(xDiscColl);
     currentZ = xDisc.z() - dimensions.zmin() - envelopeThickness;
+
+    Volume discVolume("disc", discShape, lcdd.air());
+    discVolume.setVisAttributes(lcdd.invisible());
+    PlacedVolume placedDiscVolume = envelopeVolume.placeVolume(discVolume, DD4hep::Geometry::Position(0, 0, currentZ));
+    placedDiscVolume.addPhysVolID("layer", discCounter);
     DetElement disc_det(worldDetElement, "disc" + std::to_string(discCounter), discCounter);
-    // generate rings and place in  discs
+    disc_det.setPlacement(placedDiscVolume);
+    ++discCounter;
+
+    int moduleCounter = 0;
+
+    // generate rings and place in disc
     for (DD4hep::XML::Collection_t xRingColl(xFirstDiscRings, _U(ring)); nullptr != xRingColl; ++xRingColl) {
       PlacedVolume sensitivePlacement;
       Component xRing = static_cast<Component>(xRingColl);
@@ -132,21 +138,15 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
         placedModuleVolume.addPhysVolID("module", moduleCounter);
         //moduleVolume.setSensitiveDetector(sensDet);
         DetElement mod_det("module" + std::to_string(moduleCounter), moduleCounter);
-
         mod_det.setPlacement(placedModuleVolume);
         disc_det.add(mod_det);
 
 	DetElement detSensor( mod_det, "sensor", xmlDet.id());
 	detSensor.setPlacement( sensitivePlacement );
-
 	++moduleCounter;
-      }
-    }
-  PlacedVolume placedDiscVolume = envelopeVolume.placeVolume(discVolume, DD4hep::Geometry::Position(0, 0, currentZ));
-  placedDiscVolume.addPhysVolID("layer", discCounter);
-  disc_det.setPlacement(placedDiscVolume);
-  ++discCounter;
-  }
+      } // for all phi
+    }// for all rings
+  }// for all discs
 
   // top of the hierarchy
   Volume motherVol = lcdd.pickMotherVolume(worldDetElement);
