@@ -82,7 +82,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
             componentVolume,
             DD4hep::Geometry::Position(
                 0, integratedCompThickness - 0.5 * xModuleProperties.attr<double>("modThickness") + 0.5 * xComp.thickness(), 0));
-        placedComponentVolume.addPhysVolID("component", componentCounter);
+        //placedComponentVolume.addPhysVolID("component", componentCounter);
 	
 	if( xComp.isSensitive() ) {
 	  componentVolume.setSensitiveDetector(sensDet);
@@ -143,7 +143,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
       }
     }
   PlacedVolume placedDiscVolume = envelopeVolume.placeVolume(discVolume, DD4hep::Geometry::Position(0, 0, currentZ));
-  placedDiscVolume.addPhysVolID("disc", discCounter);
+  placedDiscVolume.addPhysVolID("layer", discCounter);
   disc_det.setPlacement(placedDiscVolume);
   ++discCounter;
   }
@@ -159,8 +159,11 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   PlacedVolume placedEnvelopeVolume = motherVol.placeVolume(envelopeVolume, envelopeNegRotation * envelopeTranslation);
   placedEnvelopeVolume.addPhysVolID("system", xmlDet.id());
   if (dimensions.attr<bool>("reflect")) {
-    placedEnvelopeVolume.addPhysVolID("posneg", 1);
+    placedEnvelopeVolume.addPhysVolID("side", -1);
+  } else {
+    placedEnvelopeVolume.addPhysVolID("side", 1);
   }
+
   worldDetElement.setPlacement(placedEnvelopeVolume);
   return worldDetElement;
 }

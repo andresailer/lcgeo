@@ -18,39 +18,39 @@
     <readouts>
         <readout name="TrackerBarrelReadout1">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,layer:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerBarrelReadout2">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,layer:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerBarrelReadout3">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,layer:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout1">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout2">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout3">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout4">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout5">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
         <readout name="TrackerEndcapReadout6">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
-            <id>system:4,posneg:1,disc:5,module:16,component:4,x:-15,z:-15</id>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
     </readouts>
     <detectors>

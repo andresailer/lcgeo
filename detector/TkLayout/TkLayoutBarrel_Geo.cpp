@@ -72,7 +72,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerBarrel(DD4hep::Geometry::LCD
 
 
       PlacedVolume placedModuleComponentVolume = moduleVolume.placeVolume(moduleComponentVolume, offset);
-      placedModuleComponentVolume.addPhysVolID("component", moduleComponentCounter);
+      // placedModuleComponentVolume.addPhysVolID("component", moduleComponentCounter);
       ++moduleComponentCounter;
       if( xModuleComponentOdd.isSensitive() ) {
 	moduleComponentVolume.setSensitiveDetector(sensDet);
