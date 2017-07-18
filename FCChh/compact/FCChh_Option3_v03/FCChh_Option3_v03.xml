@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd xmlns:compact="http://www.lcsim.org/schemas/compact/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
+    <info name="TkLayoutTracker" title="TkLayoutTracker" author="Z.Drasal" url="http://fcc-tklayout.web.cern.ch/fcc-tklayout" status="optimization" version="FCChh_Option3">
+        <comment>The tracker geometry as designed and optimized by tkLayout software - design version: FCChh_Option3</comment>
+    </info>
+  <includes>
+    <gdmlFile  ref="elements.xml"/>
+    <gdmlFile  ref="materials.xml"/>
+  </includes>
+
+    <define>
+      <constant name="world_side"             value="30000*mm"/>
+      <constant name="world_x"                value="world_side"/>
+      <constant name="world_y"                value="world_side"/>
+      <constant name="world_z"                value="world_side"/>
+    </define>
+
+    <readouts>
+        <readout name="TrackerBarrelReadout1">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerBarrelReadout2">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerBarrelReadout3">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout1">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout2">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout3">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout4">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout5">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout6">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+    </readouts>
+
+<include ref="FCChh_v3.03_Definitions.xml"/>
+
+
+    <plugins>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="InnerBRL_Inner0"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=-1."/>
+        <argument value="n_z=1."/>
+      </plugin>	
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="InnerBRL_Inner1"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="InnerECAPpos"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="InnerECAPneg"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="OuterBRL"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="OuterECAP"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
+        <argument value="OuterECAPneg"/>
+        <argument value="dimension=2"/>
+        <argument value="u_x=-1."/>
+        <argument value="v_y=1."/>
+        <argument value="n_z=1."/>
+      </plugin>
+      <!-- <plugin name="DD4hep_GenericSurfaceInstallerPlugin"> -->
+      <!--   <argument value="FwdECAPpos"/> -->
+      <!--   <argument value="dimension=2"/> -->
+      <!--   <argument value="u_x=-1."/> -->
+      <!--   <argument value="v_y=1."/> -->
+      <!--   <argument value="n_z=1."/> -->
+      <!-- </plugin> -->
+      <!-- <plugin name="DD4hep_GenericSurfaceInstallerPlugin"> -->
+      <!--   <argument value="FwdECAPneg"/> -->
+      <!--   <argument value="dimension=2"/> -->
+      <!--   <argument value="u_x=-1."/> -->
+      <!--   <argument value="v_y=1."/> -->
+      <!--   <argument value="n_z=1."/> -->
+      <!-- </plugin> -->
+    </plugins>
+    <plugins>
+      <plugin name="InstallSurfaceManager"/>
+    </plugins>
+    
+    
+</lccdd>
