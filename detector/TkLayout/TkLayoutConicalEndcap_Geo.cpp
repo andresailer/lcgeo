@@ -11,13 +11,13 @@ using DD4hep::XML::Component;
 using DD4hep::Geometry::PlacedVolume;
 
 namespace det {
-static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCDD& lcdd,
+static DD4hep::Geometry::Ref_t createTkLayoutTrackerConicalEndcap(DD4hep::Geometry::LCDD& lcdd,
                                                            DD4hep::XML::Handle_t xmlElement,
                                                            DD4hep::Geometry::SensitiveDetector sensDet) {
   // shorthands
   DD4hep::XML::DetElement xmlDet = static_cast<DD4hep::XML::DetElement>(xmlElement);
   Dimension dimensions(xmlDet.dimensions());
-  double l_overlapMargin = 0.01;
+  double l_overlapMargin = 10;
 
   // get sensitive detector type from xml
   DD4hep::XML::Dimension sdTyp = xmlElement.child(_Unicode(sensitive));  // retrieve the type
@@ -30,31 +30,31 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
 
   // envelope volume for one of the endcaps, either forward or backward
   double envelopeThickness = 0.5 * (dimensions.zmax() - dimensions.zmin());
-  DD4hep::Geometry::Tube envelopeShape(
-      dimensions.rmin() - l_overlapMargin, dimensions.rmax() + l_overlapMargin, envelopeThickness + l_overlapMargin);
+  DD4hep::Geometry::Cone envelopeShape(envelopeThickness + l_overlapMargin,
+      dimensions.rmin1(), dimensions.rmax1() + l_overlapMargin, dimensions.rmin2(), dimensions.rmax2() + l_overlapMargin);
   Volume envelopeVolume(detName, envelopeShape, lcdd.air());
-  envelopeVolume.setVisAttributes(lcdd.invisible());
+  //envelopeVolume.setVisAttributes(lcdd.invisible());
 
   Component xDiscs = xmlElement.child(_Unicode(discs));
-  Component xFirstDisc = xDiscs.child(_Unicode(discZPls));
-  Component xFirstDiscRings = xFirstDisc.child(_Unicode(rings));
 
-  // create disc volume
-  l_overlapMargin *= 0.9;
-  double discThickness = 0.5 * (xFirstDisc.zmax() - xFirstDisc.zmin());
-  DD4hep::Geometry::Tube discShape(dimensions.rmin() - l_overlapMargin, dimensions.rmax() + l_overlapMargin, discThickness + l_overlapMargin);
-  Volume discVolume("disc", discShape, lcdd.air());
+  l_overlapMargin *= 0.1;
 
 
   unsigned int discCounter = 0;
   double currentZ;
+  /// iterate over discs
   for (DD4hep::XML::Collection_t xDiscColl(xDiscs, _Unicode(discZPls)); nullptr != xDiscColl; ++xDiscColl) {
     Component xDisc = static_cast<Component>(xDiscColl);
-     unsigned int compCounter = 0;
+    unsigned int compCounter = 0;
+    // create disc volume
+    double discThickness = 0.5 * (xDisc.zmax() - xDisc.zmin());
+    DD4hep::Geometry::Tube discShape(xDisc.rmin(), xDisc.rmax() + l_overlapMargin, discThickness + l_overlapMargin);
+    Volume discVolume("disc", discShape, lcdd.air());
     currentZ = xDisc.z() - dimensions.zmin() - envelopeThickness;
     DetElement disc_det(worldDetElement, "disc" + std::to_string(discCounter), discCounter);
     // iterate over rings
-    for (DD4hep::XML::Collection_t xRingColl(xFirstDiscRings, _U(ring)); nullptr != xRingColl; ++xRingColl) {
+    Component xCurrentRings = xDisc.child(_Unicode(rings)); 
+    for (DD4hep::XML::Collection_t xRingColl(xCurrentRings, _U(ring)); (nullptr != xRingColl); ++xRingColl) {
       Component xRing = static_cast<Component>(xRingColl);
       Component xRingModules = xRing.child(_Unicode(modules));
       Component xModuleOdd = xRingModules.child(_Unicode(moduleOdd));
@@ -74,7 +74,7 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
                                                            0.5 * xComp.thickness(),
                                                            0.5 * xSensorProperties.attr<double>("sensorLength")),
                                lcdd.material(xComp.materialStr()));
-      componentVolume.setVisAttributes(lcdd.invisible());
+        componentVolume.setVisAttributes(lcdd.invisible());
       unsigned int nPhi = xRing.attr<int>("nModules");
       double phi = 0;
       for (unsigned int phiIndex = 0; phiIndex < nPhi; ++phiIndex) {
@@ -89,13 +89,13 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
           phi = 2 * dd4hep::pi * static_cast<double>(phiIndex) / static_cast<double>(nPhi);
           lX = xModuleEven.X();
           lY = xModuleEven.Y();
-          lZ = xModuleEven.Z() - dimensions.zmin() - discThickness;
+          lZ = xModuleEven.Z() - xDisc.zmin() - discThickness;
           phiTilt = xModuleEven.attr<double>("phiTilt");
           thetaTilt = xModuleEven.attr<double>("thetaTilt");
         } else {
           lX = xModuleOdd.X();
           lY = xModuleOdd.Y();
-          lZ = xModuleOdd.Z() - dimensions.zmin() - discThickness;
+          lZ = xModuleOdd.Z() - xDisc.zmin() - discThickness;
           phiTilt = xModuleOdd.attr<double>("phiTilt");
           thetaTilt = xModuleOdd.attr<double>("thetaTilt");
         }
@@ -142,7 +142,6 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   } else {
     placedEnvelopeVolume.addPhysVolID("side", 1);
   }
-
   DD4hep::Geometry::RotationX envelopeNegRotation(envelopeNegRotAngle);
   PlacedVolume placedEnvelopeVolume = motherVol.placeVolume(envelopeVolume, envelopeNegRotation * envelopeTranslation);
   placedEnvelopeVolume.addPhysVolID("system", xmlDet.id());
@@ -151,4 +150,4 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
 }
 }  // namespace det
 
-DECLARE_DETELEMENT(TkLayoutEcapTracker, det::createTkLayoutTrackerEndcap)
+DECLARE_DETELEMENT(TkLayoutConicalEcapTracker, det::createTkLayoutTrackerConicalEndcap)
