@@ -59,14 +59,14 @@
 
     <plugins>
       <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
-        <argument value="InnerBRL_Inner0"/>
+        <argument value="InnerBRL_0"/>
         <argument value="dimension=2"/>
         <argument value="u_x=-1."/>
         <argument value="v_y=-1."/>
         <argument value="n_z=1."/>
       </plugin>	
       <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
-        <argument value="InnerBRL_Inner1"/>
+        <argument value="InnerBRL_1"/>
         <argument value="dimension=2"/>
         <argument value="u_x=-1."/>
         <argument value="v_y=1."/>
@@ -94,7 +94,7 @@
         <argument value="n_z=1."/>
       </plugin>
       <plugin name="DD4hep_GenericSurfaceInstallerPlugin">
-        <argument value="OuterECAP"/>
+        <argument value="OuterECAPpos"/>
         <argument value="dimension=2"/>
         <argument value="u_x=-1."/>
         <argument value="v_y=1."/>
