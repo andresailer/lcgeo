@@ -138,13 +138,15 @@ static DD4hep::Geometry::Ref_t createTkLayoutTrackerEndcap(DD4hep::Geometry::LCD
   double envelopeNegRotAngle = 0;
   if (dimensions.reflect()) {
     envelopeNegRotAngle = dd4hep::pi;
-    placedEnvelopeVolume.addPhysVolID("side", -1);
-  } else {
-    placedEnvelopeVolume.addPhysVolID("side", 1);
   }
 
   DD4hep::Geometry::RotationX envelopeNegRotation(envelopeNegRotAngle);
   PlacedVolume placedEnvelopeVolume = motherVol.placeVolume(envelopeVolume, envelopeNegRotation * envelopeTranslation);
+  if (dimensions.reflect()) {
+    placedEnvelopeVolume.addPhysVolID("side", -1);
+  } else {
+    placedEnvelopeVolume.addPhysVolID("side", 1);
+  }
   placedEnvelopeVolume.addPhysVolID("system", xmlDet.id());
   worldDetElement.setPlacement(placedEnvelopeVolume);
   return worldDetElement;
