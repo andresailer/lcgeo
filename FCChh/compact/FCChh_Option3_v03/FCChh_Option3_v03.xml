@@ -46,11 +46,19 @@
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
             <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
-        <readout name="TrackerEndcapReadout5">
+        <readout name="TrackerEndcapReadout5_pos">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
             <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>
-        <readout name="TrackerEndcapReadout6">
+        <readout name="TrackerEndcapReadout5_neg">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout6_pos">
+            <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
+            <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
+        </readout>
+        <readout name="TrackerEndcapReadout6_neg">
             <segmentation type="CartesianGridXZ" grid_size_x="0.005*mm" grid_size_z="0.010*mm"/>
             <id>system:5,side:-2,layer:5,module:16,x:-15,z:-15</id>
         </readout>

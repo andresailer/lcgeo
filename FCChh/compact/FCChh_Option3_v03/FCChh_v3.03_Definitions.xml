@@ -2111,7 +2111,7 @@
             </discZPls>
         </discs>
     </detector>
-    <detector name="FwdIECAPpos" id="20" type="TkLayoutConicalEcapTracker" readout="TrackerEndcapReadout5">
+    <detector name="FwdIECAPpos" id="20" type="TkLayoutConicalEcapTracker" readout="TrackerEndcapReadout5_pos">
         <dimensions rmin1="25.000*mm" rmax1="943*mm" rmin2="25.000*mm" rmax2="1342*mm" zmin="6231.066*mm" zmax="8769.293*mm" reflect="false"/>
         <sensitive type="tracker"/>
         <discs repeat="6">
@@ -2690,7 +2690,7 @@
             </discZPls>
         </discs>
     </detector>
-    <detector name="FwdIECAPneg" id="21" type="TkLayoutConicalEcapTracker" readout="TrackerEndcapReadout5">
+    <detector name="FwdIECAPneg" id="21" type="TkLayoutConicalEcapTracker" readout="TrackerEndcapReadout5_neg">
         <dimensions rmin1="25.000*mm" rmax1="943*mm" rmin2="25.000*mm" rmax2="1344*mm" zmin="6231.066*mm" zmax="8769.293*mm" reflect="true"/>
         <sensitive type="tracker"/>
         <discs repeat="6">
@@ -3269,7 +3269,7 @@
             </discZPls>
         </discs>
     </detector>
-    <detector name="FwdECAPpos" id="22" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout6">
+    <detector name="FwdECAPpos" id="22" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout6_pos">
         <dimensions rmin="49.500*mm" rmax="1550.163*mm" zmin="9990.707*mm" zmax="16009.294*mm" reflect="false"/>
         <sensitive type="tracker"/>
         <discs repeat="12">
@@ -3549,7 +3549,7 @@
             </discZPls>
         </discs>
     </detector>
-    <detector name="FwdECAPneg" id="23" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout6">
+    <detector name="FwdECAPneg" id="23" type="TkLayoutEcapTracker" readout="TrackerEndcapReadout6_neg">
         <dimensions rmin="49.500*mm" rmax="1550.163*mm" zmin="9990.707*mm" zmax="16009.294*mm" reflect="true"/>
         <sensitive type="tracker"/>
         <discs repeat="12">
