@@ -43,12 +43,12 @@ static dd4hep::Ref_t createTkLayoutTrackerEndcap(dd4hep::Detector& lcdd,
   l_overlapMargin *= 0.9;
   double discThickness = 0.5 * (xFirstDisc.zmax() - xFirstDisc.zmin());
   dd4hep::Tube discShape(dimensions.rmin() - l_overlapMargin, dimensions.rmax() + l_overlapMargin, discThickness + l_overlapMargin);
-  Volume discVolume("disc", discShape, lcdd.air());
 
 
   unsigned int discCounter = 0;
   double currentZ;
   for (dd4hep::xml::Collection_t xDiscColl(xDiscs, _Unicode(discZPls)); nullptr != xDiscColl; ++xDiscColl) {
+    Volume discVolume("disc", discShape, lcdd.air());
     Component xDisc = static_cast<Component>(xDiscColl);
      unsigned int compCounter = 0;
     currentZ = xDisc.z() - dimensions.zmin() - envelopeThickness;
