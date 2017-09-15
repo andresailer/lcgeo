@@ -47,7 +47,7 @@
         <constant name="DetID_LumiCal"          value="15"/>
         <constant name="DetID_BeamCal"          value="16"/>
 
-        <constant name="CentralBeamPipe_zmax"   value="308.*mm"/>
+        <constant name="CentralBeamPipe_zmax"   value="325.14*mm"/>
         <constant name="CentralBeamPipe_rmax"   value="30.0*mm"/>
         <constant name="ConeBeamPipe_zmax"      value="2080*mm"/>
         <constant name="ConeBeamPipe_rmax"      value="240.0*mm"/>
