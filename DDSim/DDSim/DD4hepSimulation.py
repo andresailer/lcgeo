@@ -7,7 +7,7 @@ Based on M. Frank and F. Gaede runSim.py
 
 """
 __RCSID__ = "$Id$"
-from SystemOfUnits import *
+from g4units import *
 import argparse
 try:
   import argcomplete
