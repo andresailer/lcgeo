@@ -2,12 +2,12 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
 
-    <info name="FCCee_o1_v05"
-        title="FCCee detector model option 1 version 05 (update on MDI region)"
-	author="Andre Sailer"
+    <info name="FCCee_o3_v06"
+        title="FCCee detector model option 3 version 06 (update on LAr ECAL)"
+	author="Andre, Swathi, Brieuc, Juraj"
         url="http://ilcsoft.desy.de"
         status="development"
-        version="5">
+        version="6">
         <comment>The compact format for the FCCee Detector design</comment>
     </info>
 
